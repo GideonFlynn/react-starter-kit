@@ -8,10 +8,11 @@
  */
 
 import sequelize from '../sequelize';
-import User from './User';
-import UserLogin from './UserLogin';
-import UserClaim from './UserClaim';
-import UserProfile from './UserProfile';
+import User from './users/User';
+import UserLogin from './users/UserLogin';
+import UserClaim from './users/UserClaim';
+import UserProfile from './users/UserProfile';
+import UserFavorite from './users/UserFavorite';
 
 User.hasMany(UserLogin, {
   foreignKey: 'userId',
@@ -23,6 +24,13 @@ User.hasMany(UserLogin, {
 User.hasMany(UserClaim, {
   foreignKey: 'userId',
   as: 'claims',
+  onUpdate: 'cascade',
+  onDelete: 'cascade',
+});
+
+User.hasMany(UserFavorite, {
+  foreignKey: 'userId',
+  as: 'favorites',
   onUpdate: 'cascade',
   onDelete: 'cascade',
 });
@@ -39,4 +47,4 @@ function sync(...args) {
 }
 
 export default { sync };
-export { User, UserLogin, UserClaim, UserProfile };
+export { User, UserLogin, UserClaim, UserProfile, UserFavorite };
