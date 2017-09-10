@@ -24,7 +24,7 @@ import router from './router';
 const apolloClient = createApolloClient();
 
 /* eslint-disable global-require */
-
+require('offline-plugin/runtime').install();
 // Universal HTTP client
 const fetch = createFetch(self.fetch, {
   baseUrl: window.App.apiUrl,

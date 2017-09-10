@@ -11,21 +11,13 @@ import React from 'react';
 import Home from './Home';
 import Layout from '../../components/Layout';
 
-async function action({ fetch }) {
-  const resp = await fetch('/graphql', {
-    body: JSON.stringify({
-      query: '{databaseGetAllUsers{id, email, updatedAt}}',
-    }),
-  });
-  const { data } = await resp.json();
-  if (!data || !data.databaseGetAllUsers)
-    throw new Error('Failed to load the users.');
+async function action() {
   return {
     chunks: ['home'],
     title: 'React Starter Kit',
     component: (
       <Layout>
-        <Home users={data.databaseGetAllUsers} />
+        <Home />
       </Layout>
     ),
   };
