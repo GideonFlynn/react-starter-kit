@@ -355,9 +355,17 @@ const clientConfig = {
             },
           }),
         ]),
+    // Webpack Bundle Analyzer
+    // https://github.com/th0r/webpack-bundle-analyzer
+    ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
+      excludes: ['**/*.map'],
+      updateStrategy: 'changed',
+      autoUpdate: 1000 * 60 * 2,
+
       ServiceWorker: {
+        events: true,
         output: '../sw.js',
         publicPath: '/sw.js',
       },
@@ -366,9 +374,6 @@ const clientConfig = {
         publicPath: '/appcache',
       },
     }),
-    // Webpack Bundle Analyzer
-    // https://github.com/th0r/webpack-bundle-analyzer
-    ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
   ],
 
   // Some libraries import Node modules but don't use them in the browser.

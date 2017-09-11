@@ -10,6 +10,8 @@ const client = new ApolloClient({
   }),
   queryDeduplication: true,
   reduxRootSelector: state => state.apollo,
+  ssrMode: true,
+  ssrForceFetchDelay: 100,
 });
 
 export default function createApolloClient() {
