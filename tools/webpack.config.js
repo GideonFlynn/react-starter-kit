@@ -360,16 +360,20 @@ const clientConfig = {
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
+      safeToUseOptionalCaches: true,
       excludes: ['**/*.map'],
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,
+      caches: 'all',
 
       ServiceWorker: {
         events: true,
         output: '../sw.js',
         publicPath: '/sw.js',
+        navigateFallbackURL: '/',
       },
       AppCache: {
+        events: true,
         output: '../appcache',
         publicPath: '/appcache',
       },

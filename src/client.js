@@ -26,8 +26,23 @@ const apolloClient = createApolloClient();
 
 /* eslint-disable global-require */
 OfflinePluginRuntime.install({
-  onUpdateReady: () => OfflinePluginRuntime.applyUpdate(),
-  onUpdated: () => (window.swUpdate = true), // eslint-disable-line no-return-assign
+  onUpdating: () => {
+    console.log('SW Event:', 'onUpdating'); // eslint-disable-line no-console
+  },
+  onUpdateReady: () => {
+    console.log('SW Event:', 'onUpdateReady'); // eslint-disable-line no-console
+    // Tells to new SW to take control immediately
+    OfflinePluginRuntime.applyUpdate();
+  },
+  onUpdated: () => {
+    console.log('SW Event:', 'onUpdated'); // eslint-disable-line no-console
+    // Reload the webpage to load into the new version
+    window.location.reload();
+  },
+
+  onUpdateFailed: () => {
+    console.log('SW Event:', 'onUpdateFailed'); // eslint-disable-line no-console
+  },
 });
 // Universal HTTP client
 const fetch = createFetch(self.fetch, {
