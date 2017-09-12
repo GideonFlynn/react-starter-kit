@@ -6,8 +6,8 @@ node_modules/
 # Compiled output
 build
 
-# Runtime data
-database.sqlite
+# Private DigitalOcean cloud-init file
+cloud-init
 
 # Test coverage
 coverage
@@ -28,3 +28,4 @@ yarn-error.log*
 
 # Misc
 .DS_Store
+*.gz
