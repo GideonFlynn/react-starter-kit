@@ -15,7 +15,32 @@
     {
       "src": "/tile.png",
       "type": "image/png",
-      "size": "64x64"
+      "sizes": "96x96"
+    },
+    {
+      "src": "/tile.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "/tile.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/tile.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/tile.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/tile-wide.png",
+      "type": "image/png",
+      "size": "1024x1024"
     }
   ]
 }
