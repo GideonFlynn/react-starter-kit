@@ -11,6 +11,7 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
+import CompressionPlugin from 'compression-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import OfflinePlugin from 'offline-plugin';
 import overrideRules from './lib/overrideRules';
@@ -360,12 +361,14 @@ const clientConfig = {
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
-      safeToUseOptionalCaches: true,
       externals: ['/assets/manifest.json', '/'],
-      excludes: ['**/*.map'],
+      excludes: ['**/*.map', '**/*.chunk.js'],
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,
-      caches: 'all',
+      caches: {
+        main: ['**/*.*.js.gz'],
+        additional: [':externals:'],
+      },
 
       ServiceWorker: {
         events: true,
@@ -378,6 +381,13 @@ const clientConfig = {
         output: '../appcache',
         publicPath: '/appcache',
       },
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      regExp: /\.js$|\.html$/,
+      threshold: 40,
+      minRatio: 0.8,
     }),
   ],
 
@@ -492,6 +502,13 @@ const serverConfig = {
       banner: 'require("source-map-support").install();',
       raw: true,
       entryOnly: false,
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      regExp: /\.js$|\.html$/,
+      threshold: 40,
+      minRatio: 0.8,
     }),
   ],
 
