@@ -361,13 +361,13 @@ const clientConfig = {
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
-      externals: ['/assets/manifest.json', '/'],
+      externals: ['/assets/manifest.json', '/', '/login'],
       excludes: ['**/*.map', '**/*.chunk.js'],
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,
       caches: {
-        main: ['**/*.*.js.gz'],
-        additional: [':externals:'],
+        main: ['**/client.*.js.gz', '**/vendor.*.js.gz', '**/home.*.js.gz'],
+        additional: [':externals:', '**/*.*.js.gz'],
       },
 
       ServiceWorker: {
@@ -377,7 +377,7 @@ const clientConfig = {
         navigateFallbackURL: '/',
       },
       AppCache: {
-        events: true,
+        caches: ['main', 'additional', 'optional'],
         output: '../appcache',
         publicPath: '/appcache',
       },

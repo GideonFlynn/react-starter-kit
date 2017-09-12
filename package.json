@@ -65,6 +65,7 @@
     "babel-types": "^6.25.0",
     "browser-sync": "^2.18.12",
     "chokidar": "^1.7.0",
+    "compression-webpack-plugin": "^1.0.0",
     "cross-env": "^5.0.1",
     "css-loader": "^0.28.4",
     "enzyme": "^2.9.1",
@@ -129,7 +130,8 @@
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-hot-middleware": "^2.18.0",
-    "webpack-node-externals": "^1.6.0"
+    "webpack-node-externals": "^1.6.0",
+    "webpack-pwa-manifest": "^3.2.0"
   },
   "babel": {
     "presets": [
