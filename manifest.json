@@ -1,0 +1,21 @@
+{
+  "start_url": "/?utm_source=homescreen",
+  "short_name": "RSK",
+  "name": "React Starter Kit",
+  "description": "My Web App!",
+  "display": "standalone",
+  "background_color": "#373277",
+  "theme_color": "#373277",
+  "icons": [
+    {
+      "src": "/tile.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/tile.png",
+      "type": "image/png",
+      "size": "64x64"
+    }
+  ]
+}

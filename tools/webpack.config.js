@@ -361,6 +361,7 @@ const clientConfig = {
 
     new OfflinePlugin({
       safeToUseOptionalCaches: true,
+      externals: ['/assets/manifest.json', '/'],
       excludes: ['**/*.map'],
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,

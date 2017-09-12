@@ -14,6 +14,7 @@ import copy from './copy';
 import bundle from './bundle';
 import render from './render';
 import pkg from '../package.json';
+import { copyFile } from './lib/fs';
 
 /**
  * Compiles the project from source files into a distributable
@@ -23,6 +24,9 @@ async function build() {
   await run(clean);
   await run(copy);
   await run(bundle);
+
+  // Wait until build/assets exist; move manifest to assets folder.
+  copyFile('manifest.json', 'build/public/assets/manifest.json');
 
   if (process.argv.includes('--static')) {
     await run(render);
