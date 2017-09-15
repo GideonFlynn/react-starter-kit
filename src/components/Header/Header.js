@@ -12,8 +12,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Header.css';
 import Link from '../Link';
 import Navigation from '../Navigation';
-import logoUrl from './logo-small.png';
-import logoUrl2x from './logo-small@2x.png';
+import logoUrl from '../../../public/icons/edv@16.png';
+import logoUrl64px from '../../../public/icons/edv@64.png';
 
 class Header extends React.Component {
   render() {
@@ -24,7 +24,7 @@ class Header extends React.Component {
           <Link className={s.brand} to="/">
             <img
               src={logoUrl}
-              srcSet={`${logoUrl2x} 2x`}
+              srcSet={`${logoUrl64px} 2x`}
               width="38"
               height="38"
               alt="React"

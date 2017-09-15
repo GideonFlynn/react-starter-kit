@@ -1,11 +1,11 @@
 {
   "start_url": "/?utm_source=homescreen",
-  "short_name": "RSK",
-  "name": "React Starter Kit",
-  "description": "My Web App!",
+  "short_name": "Vegansk?",
+  "name": "Er det vegansk",
+  "description": "Er det vegansk gør det nemt for dig at finde et vegask produkt fra din ynglings dagligvare butik",
   "display": "standalone",
-  "background_color": "#373277",
-  "theme_color": "#373277",
+  "background_color": "#32A566",
+  "theme_color": "#32A566",
   "icons": [
     {
       "src": "/tile.png",
