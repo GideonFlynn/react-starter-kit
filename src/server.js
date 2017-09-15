@@ -48,7 +48,11 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
-app.use(helmet());
+app.use(
+  helmet({
+    hsts: false,
+  }),
+);
 
 // Set CORS header
 app.use((req, res, next) => {
