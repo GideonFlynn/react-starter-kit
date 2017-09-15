@@ -80,9 +80,8 @@ app.use((err, req, res, next) => {
 
 app.use(passport.initialize());
 
-if (__DEV__) {
-  app.enable('trust proxy');
-}
+app.enable('trust proxy');
+
 app.get(
   '/login/facebook',
   passport.authenticate('facebook', {
