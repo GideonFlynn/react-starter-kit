@@ -361,7 +361,21 @@ const clientConfig = {
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
-      externals: ['/assets/manifest.json', '/', '/login'],
+      externals: [
+        // Files
+        '/manifest.json',
+        '/*.png',
+        '**/*.png',
+        // Routes
+        '/',
+        '/login',
+        '/contact',
+        '/about',
+        '/login',
+        '/register',
+        '/privacy',
+        '/login',
+      ],
       excludes: ['**/*.map', '**/*.chunk.js'],
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,
@@ -375,11 +389,6 @@ const clientConfig = {
         output: '../sw.js',
         publicPath: '/sw.js',
         navigateFallbackURL: '/',
-      },
-      AppCache: {
-        caches: ['main', 'additional', 'optional'],
-        output: '../appcache',
-        publicPath: '/appcache',
       },
     }),
     new CompressionPlugin({

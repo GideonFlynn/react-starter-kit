@@ -3,11 +3,11 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
+  Mathias Kandelsdorff
 
 # THANKS
 
-  <name>
+
 
 # TECHNOLOGY COLOPHON
 
