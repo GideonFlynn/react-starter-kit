@@ -24,26 +24,23 @@ import router from './router';
 
 const apolloClient = createApolloClient();
 
+// Service Worker configuration
+
 /* eslint-disable global-require */
 OfflinePluginRuntime.install({
-  onUpdating: () => {
-    console.log('SW Event:', 'onUpdating'); // eslint-disable-line no-console
-  },
+  onUpdating: () => {},
   onUpdateReady: () => {
-    console.log('SW Event:', 'onUpdateReady'); // eslint-disable-line no-console
     // Tells to new SW to take control immediately
     OfflinePluginRuntime.applyUpdate();
   },
   onUpdated: () => {
-    console.log('SW Event:', 'onUpdated'); // eslint-disable-line no-console
     // Reload the webpage to load into the new version
     window.location.reload();
   },
 
-  onUpdateFailed: () => {
-    console.log('SW Event:', 'onUpdateFailed'); // eslint-disable-line no-console
-  },
+  onUpdateFailed: () => {},
 });
+
 // Universal HTTP client
 const fetch = createFetch(self.fetch, {
   baseUrl: window.App.apiUrl,

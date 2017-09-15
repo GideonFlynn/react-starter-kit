@@ -15,6 +15,7 @@ import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
+import helmet from 'helmet';
 import nodeFetch from 'node-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -47,6 +48,18 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
+app.use(helmet());
+
+// Set CORS header
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
+  next();
+});
+
 app.use(
   express.static(path.resolve(__dirname, 'public'), {
     dotfiles: 'allow',
@@ -55,8 +68,6 @@ app.use(
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.get('/health-check', (req, res) => res.sendStatus(200));
-app.use(express.static('.well-known/acme-challenge/'));
 //
 // Authentication
 // -----------------------------------------------------------------------------
