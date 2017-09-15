@@ -33,14 +33,14 @@ class Home extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <h1>React.js News</h1>
+          <h1>Er det vegansk?</h1>
           {loading
             ? 'Loading...'
             : databaseGetAllUsers.map(item =>
                 <article key={item.id} className={s.newsItem}>
                   <h1 className={s.newsTitle}>
                     <a href={item.id}>
-                      {item.email}
+                      {item.id}
                     </a>
                   </h1>
                   <div
@@ -62,7 +62,6 @@ export default compose(
     query {
       databaseGetAllUsers {
         id
-        email
         updatedAt
       }
     }

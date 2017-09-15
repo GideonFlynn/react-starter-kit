@@ -11,10 +11,12 @@ import React from 'react';
 import Home from './Home';
 import Layout from '../../components/Layout';
 
-async function action() {
+const title = 'Home';
+
+function action() {
   return {
     chunks: ['home'],
-    title: 'React Starter Kit',
+    title,
     component: (
       <Layout>
         <Home />
