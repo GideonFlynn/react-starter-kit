@@ -361,11 +361,10 @@ const clientConfig = {
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
+      safeToUseOptionalCaches: true,
       externals: [
         // Files
-        '/manifest.json',
-        '/*.png',
-        '**/*.png',
+        'manifest.json',
         // Routes
         '/',
         '/login',
@@ -380,7 +379,12 @@ const clientConfig = {
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,
       caches: {
-        main: ['**/client.*.js.gz', '**/vendor.*.js.gz', '**/home.*.js.gz'],
+        main: [
+          '**/*.svg',
+          '**/client.*.js.gz',
+          '**/vendor.*.js.gz',
+          '**/home.*.js.gz',
+        ],
         additional: [':externals:', '**/*.*.js.gz'],
       },
 
