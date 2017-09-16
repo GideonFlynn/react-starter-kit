@@ -11,7 +11,6 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
-import CompressionPlugin from 'compression-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import OfflinePlugin from 'offline-plugin';
 import overrideRules from './lib/overrideRules';
@@ -361,32 +360,25 @@ const clientConfig = {
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
-      safeToUseOptionalCaches: true,
       externals: [
-        // Files
-        'manifest.json',
-        '*.svg',
-        // Routes
+        '/assets/manifest.json',
+        '/*.svg',
         '/',
+        '/?utm_source=homescreen',
         '/login',
         '/contact',
-        '/about',
-        '/login',
         '/register',
+        '/admin',
         '/privacy',
-        '/login',
+        '/not-found',
+        '/about',
       ],
-      excludes: ['**/*.map', '**/*.chunk.js'],
+      excludes: ['**/*.map'],
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,
       caches: {
-        main: [
-          '**/*.svg',
-          '**/client.*.js.gz',
-          '**/vendor.*.js.gz',
-          '**/home.*.js.gz',
-        ],
-        additional: [':externals:', '**/*.*.js.gz'],
+        main: ['**/home.*.js', '**/contact.*.js', '**/about.*.js'],
+        additional: [':externals:'],
       },
 
       ServiceWorker: {
@@ -395,13 +387,6 @@ const clientConfig = {
         publicPath: '/sw.js',
         navigateFallbackURL: '/',
       },
-    }),
-    new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      regExp: /\.js$|\.html$/,
-      threshold: 40,
-      minRatio: 0.8,
     }),
   ],
 
@@ -516,13 +501,6 @@ const serverConfig = {
       banner: 'require("source-map-support").install();',
       raw: true,
       entryOnly: false,
-    }),
-    new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      regExp: /\.js$|\.html$/,
-      threshold: 40,
-      minRatio: 0.8,
     }),
   ],
 
