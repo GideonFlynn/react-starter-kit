@@ -8,10 +8,10 @@
  */
 
 import 'whatwg-fetch';
-import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import deepForceUpdate from 'react-deep-force-update';
+import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import queryString from 'query-string';
 import { createPath } from 'history/PathUtils';
 import App from './components/App';
@@ -25,22 +25,12 @@ import router from './router';
 const apolloClient = createApolloClient();
 
 // Service Worker configuration
-
-/* eslint-disable global-require */
 OfflinePluginRuntime.install({
-  onUpdating: () => {},
   onUpdateReady: () => {
     // Tells to new SW to take control immediately
     OfflinePluginRuntime.applyUpdate();
   },
-  onUpdated: () => {
-    // Reload the webpage to load into the new version
-    window.location.reload();
-  },
-
-  onUpdateFailed: () => {},
 });
-
 // Universal HTTP client
 const fetch = createFetch(self.fetch, {
   baseUrl: window.App.apiUrl,

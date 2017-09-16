@@ -360,24 +360,21 @@ const clientConfig = {
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
 
     new OfflinePlugin({
+      publicPath: '/assets/',
       externals: [
-        '/assets/manifest.json',
-        '/*.svg',
         '/',
-        '/?utm_source=homescreen',
         '/login',
         '/contact',
         '/register',
-        '/admin',
         '/privacy',
-        '/not-found',
         '/about',
+        '/kategori',
       ],
-      excludes: ['**/*.map'],
+      excludes: ['**/*.map', '*.map'],
       updateStrategy: 'changed',
       autoUpdate: 1000 * 60 * 2,
       caches: {
-        main: ['**/home.*.js', '**/contact.*.js', '**/about.*.js'],
+        main: [':rest:'],
         additional: [':externals:'],
       },
 

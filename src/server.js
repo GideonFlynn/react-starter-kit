@@ -54,21 +54,7 @@ app.use(
   }),
 );
 
-// Set CORS header
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  next();
-});
-
-app.use(
-  express.static(path.resolve(__dirname, 'public'), {
-    dotfiles: 'allow',
-  }),
-);
+app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
