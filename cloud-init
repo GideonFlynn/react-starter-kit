@@ -1,0 +1,45 @@
+#cloud-config
+users:
+  - name: gideon
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCprVidR0Hh0EM1tNCYLv3uiYyPv35gqZdz8YzE9eYOhkLy5RQAjdgdzv6/wagc9L/rSIoOwMoUuMdafEnH6x9f07xvBWLL5pEV5ODy7HUC0QLTDa7Cpe8X7ZvjZ4ainPWfQgVKVGCaIjzea2dPMV2FNC1JP6wFqsWK6GJdC1vUY7QUe0OnvihHIvk+Hxuy2iR1bARIJyIs2rumOT/zLwoMupDxXmg7MMKO5VoPQOw5fYU7IdAajwJpBCnr9O/aQqrtTXQ+3b+kT/dM4bocPgTSxTFIvgB9IHIaofxxb+ciKI+2fTIt1n2fnIx33vRFXZgmeOdSKzxUnt51Qxh42tXB gideon@gideon-Aspire-V3-772
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
+runcmd:
+  - sed -i -e '/^Port/s/^.*$/Port 2222/' /etc/ssh/sshd_config
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
+  - sed -i -e '$aAllowUsers gideon' /etc/ssh/sshd_config
+  - apt-get -y update
+  - apt-get -y install finger
+  - apt-get -y install postgresql postgresql-contrib
+  - apt-get -y install git
+  - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+  - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+  - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  - apt-get -y update
+  - apt-get install -y nodejs
+  - apt-get install -y build-essential
+  - apt-get install yarn
+  - apt-get -y upgrade
+  - apt-get -y autoremove
+  - apt-get y update
+  - apt-get -y dist-upgrade
+  - service ssh restart
+  - service postgresql restart
+  - apt-get install apt-transport-https ca-certificates curl software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - apt-get update
+  - apt-get install docker-ce
+  - apt-get install \
+    linux-image-extra-$(uname -r) \
+    linux-image-extra-virtual
+  - apt-get install software-properties-common
+  - add-apt-repository ppa:certbot/certbot
+  - apt-get install -y certbot
+  - apt-get install -y letsencrypt
+  - apt-get update
+  - apt-get autoremove
+power_state:
+  mode: reboot
