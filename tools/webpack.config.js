@@ -365,6 +365,7 @@ const clientConfig = {
       externals: [
         // Files
         'manifest.json',
+        '*.svg',
         // Routes
         '/',
         '/login',

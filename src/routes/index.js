@@ -19,9 +19,37 @@ const routes = {
       path: '/',
       load: () => import(/* webpackChunkName: 'home' */ './home'),
     },
+
+    {
+      path: '/kategori',
+      children: [
+        {
+          path: '',
+          load: () => import(/* webpackChunkName: 'category' */ './category'),
+        },
+        {
+          path: '/:categoryName',
+          children: [
+            {
+              path: '',
+              load: () => import(/* webpackChunkName: 'login' */ './login'),
+            },
+            {
+              path: '/:product',
+              children: [
+                {
+                  path: '',
+                  load: () => import(/* webpackChunkName: 'about' */ './about'),
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
     {
       path: '/contact',
-      load: () => import(/* webpackChunkName: 'contact' */ './contact'),
+      load: () => import(/* webpackChunkName: 'category' */ './contact'),
     },
     {
       path: '/login',
@@ -56,19 +84,20 @@ const routes = {
     const route = await next();
 
     // Provide default values for title, description etc.
-    route.title = `${route.title || 'Untitled Page'} - www.reactstarterkit.com`;
+    route.title = `${route.title || 'Untitled Page'} - Er det vegansk`;
     route.description = route.description || '';
-
     return route;
   },
 };
 
 // The error page is available by permanent url for development mode
+
+/*
 if (__DEV__) {
   routes.children.unshift({
     path: '/error',
     action: require('./error').default,
   });
 }
-
+*/
 export default routes;
