@@ -354,37 +354,46 @@ const clientConfig = {
               screw_ie8: true,
             },
           }),
+          new OfflinePlugin({
+            publicPath: '/assets/',
+
+            externals: [
+              '/',
+              '/contact',
+              '/login',
+              '/register',
+              '/privacy',
+              '/about',
+              '/kategori',
+            ],
+            excludes: [
+              '**/*.map',
+              '*.map',
+              '/login/facebook',
+              '/login/facebook/return',
+              '/login/facebook/*',
+              '/#_=_',
+            ],
+
+            updateStrategy: 'changed',
+            autoUpdate: 1000 * 60 * 2,
+
+            safeToUseOptionalCaches: true,
+            caches: {
+              main: [':rest:'],
+              additional: [':externals:'],
+            },
+
+            ServiceWorker: {
+              events: true,
+              output: '../sw.js',
+              publicPath: '/sw.js',
+            },
+          }),
         ]),
     // Webpack Bundle Analyzer
     // https://github.com/th0r/webpack-bundle-analyzer
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
-
-    new OfflinePlugin({
-      publicPath: '/assets/',
-      externals: [
-        '/',
-        '/login',
-        '/contact',
-        '/register',
-        '/privacy',
-        '/about',
-        '/kategori',
-      ],
-      excludes: ['**/*.map', '*.map'],
-      updateStrategy: 'changed',
-      autoUpdate: 1000 * 60 * 2,
-      caches: {
-        main: [':rest:'],
-        additional: [':externals:'],
-      },
-
-      ServiceWorker: {
-        events: true,
-        output: '../sw.js',
-        publicPath: '/sw.js',
-        navigateFallbackURL: '/',
-      },
-    }),
   ],
 
   // Some libraries import Node modules but don't use them in the browser.
