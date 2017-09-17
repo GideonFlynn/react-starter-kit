@@ -44,9 +44,9 @@ module.exports = {
 
     // https://developers.facebook.com/
     facebook: {
-      id: process.env.FACEBOOK_APP_ID || '186244551745631',
+      id: process.env.FACEBOOK_APP_ID || '318560071948908',
       secret:
-        process.env.FACEBOOK_APP_SECRET || 'a970ae3240ab4b9b8aae0f9f0661c6fc',
+        process.env.FACEBOOK_APP_SECRET || '0e0b4fbf3604facc8f593dd62a86b3e3',
     },
 
     // https://cloud.google.com/console/project
