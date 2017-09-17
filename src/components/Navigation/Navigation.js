@@ -17,19 +17,22 @@ class Navigation extends React.Component {
   render() {
     return (
       <div className={s.root} role="navigation">
+        <Link className={s.link} to="/kategori/">
+          Kategori
+        </Link>
         <Link className={s.link} to="/about">
-          About
+          Om os
         </Link>
         <Link className={s.link} to="/contact">
-          Contact
+          Kontakt
         </Link>
         <span className={s.spacer}> | </span>
         <Link className={s.link} to="/login">
-          Log in
+          Log ind
         </Link>
-        <span className={s.spacer}>or</span>
+        <span className={s.spacer}>eller</span>
         <Link className={cx(s.link, s.highlight)} to="/register">
-          Sign up
+          Registrér
         </Link>
       </div>
     );

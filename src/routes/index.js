@@ -48,21 +48,24 @@ const routes = {
       children: [
         {
           path: '',
-          load: () => import(/* webpackChunkName: 'category' */ './category'),
+          load: () =>
+            import(/* webpackChunkName: 'category' */ './catalog/category'),
         },
         {
-          path: '/:categoryName',
+          path: '/:id',
           children: [
             {
               path: '',
-              load: () => import(/* webpackChunkName: 'login' */ './login'),
+              load: () =>
+                import(/* webpackChunkName: 'category' */ './catalog/category'),
             },
             {
-              path: '/:product',
+              path: '/:id',
               children: [
                 {
                   path: '',
-                  load: () => import(/* webpackChunkName: 'about' */ './about'),
+                  load: () =>
+                    import(/* webpackChunkName: 'category' */ './catalog/category'),
                 },
               ],
             },
@@ -70,7 +73,6 @@ const routes = {
         },
       ],
     },
-
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     {
       path: '*',
