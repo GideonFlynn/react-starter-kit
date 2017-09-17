@@ -13,6 +13,8 @@ import UserLogin from './users/UserLogin';
 import UserClaim from './users/UserClaim';
 import UserProfile from './users/UserProfile';
 import UserFavorite from './users/UserFavorite';
+// Catalog
+import Category from './catalog/category/Category';
 
 User.hasMany(UserLogin, {
   foreignKey: 'userId',
@@ -47,4 +49,4 @@ function sync(...args) {
 }
 
 export default { sync };
-export { User, UserLogin, UserClaim, UserProfile, UserFavorite };
+export { User, UserLogin, UserClaim, UserProfile, UserFavorite, Category };

@@ -1,0 +1,8 @@
+query {
+    databaseGetAllCategories {
+      id
+      name
+      description
+      shortDescription
+    }
+  }
