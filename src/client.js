@@ -144,8 +144,11 @@ async function onLocationChange(location, action) {
       return;
     }
 
+    // Make current uri globally known
+    const pathname = location.pathname;
+
     appInstance = ReactDOM.render(
-      <App context={context}>
+      <App context={context} location={pathname}>
         {route.component}
       </App>,
       container,
