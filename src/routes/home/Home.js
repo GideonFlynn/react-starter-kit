@@ -10,9 +10,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, compose } from 'react-apollo';
-import gql from 'graphql-tag';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
+import getUsersById from './getUsersById.gql';
 
 class Home extends React.Component {
   static propTypes = {
@@ -35,7 +35,7 @@ class Home extends React.Component {
         <div className={s.container}>
           <h1>Er det vegansk?</h1>
           {loading
-            ? 'Loading...'
+            ? 'Jeg prøver at kontakte serveren..'
             : databaseGetAllUsers.map(item =>
                 <article key={item.id} className={s.newsItem}>
                   <h1 className={s.newsTitle}>
@@ -56,14 +56,4 @@ class Home extends React.Component {
   }
 }
 
-export default compose(
-  withStyles(s),
-  graphql(gql`
-    query {
-      databaseGetAllUsers {
-        id
-        updatedAt
-      }
-    }
-  `),
-)(Home);
+export default compose(withStyles(s), graphql(getUsersById))(Home);

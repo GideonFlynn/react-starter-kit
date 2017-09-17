@@ -1,0 +1,6 @@
+query {
+      databaseGetAllUsers {
+        id
+        updatedAt
+      }
+    }
