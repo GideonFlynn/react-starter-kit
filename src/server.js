@@ -48,11 +48,7 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
-app.use(
-  helmet({
-    hsts: false,
-  }),
-);
+app.use(helmet());
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
@@ -81,8 +77,9 @@ app.use((err, req, res, next) => {
 
 app.use(passport.initialize());
 
-app.enable('trust proxy');
-
+if (__DEV__) {
+  app.enable('trust proxy');
+}
 app.get(
   '/login/facebook',
   passport.authenticate('facebook', {
