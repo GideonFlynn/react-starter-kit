@@ -366,15 +366,7 @@ const clientConfig = {
               '/about',
               '/kategori',
             ],
-            excludes: [
-              '**/*.map',
-              '*.map',
-              '/login/facebook',
-              '/login/facebook/return',
-              '/login/facebook/*',
-              '/#_=_',
-            ],
-
+            excludes: ['**/*.map', '*.map'],
             updateStrategy: 'changed',
             autoUpdate: 1000 * 60 * 2,
 

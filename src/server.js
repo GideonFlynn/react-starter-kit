@@ -88,13 +88,11 @@ app.get(
   passport.authenticate('facebook', {
     scope: ['email', 'user_location'],
     session: false,
-    successRedirect: '/',
   }),
 );
 app.get(
   '/login/facebook/return',
   passport.authenticate('facebook', {
-    successRedirect: '/',
     failureRedirect: '/login',
     session: false,
   }),
