@@ -354,26 +354,21 @@ const clientConfig = {
               screw_ie8: true,
             },
           }),
+
           new OfflinePlugin({
             publicPath: '/assets/',
 
-            externals: [
-              '/',
-              '/contact',
-              '/login',
-              '/register',
-              '/privacy',
-              '/about',
-              '/kategori',
-            ],
+            AppCache: false,
+
+            externals: ['/contact', '/register', '/privacy', '/kategori'],
             excludes: ['**/*.map', '*.map'],
             updateStrategy: 'changed',
             autoUpdate: 1000 * 60 * 2,
-
             safeToUseOptionalCaches: true,
+
             caches: {
-              main: [':rest:'],
-              additional: [':externals:'],
+              main: ['/', '/about'],
+              additional: [':externals:', ':rest:'],
             },
 
             ServiceWorker: {
