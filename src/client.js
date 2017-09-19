@@ -26,9 +26,15 @@ const apolloClient = createApolloClient();
 
 // Service Worker configuration
 OfflinePluginRuntime.install({
+  onInstalled: () => {
+    console.log('Ready for use offline'); // eslint-disable-line no-console
+  },
   onUpdateReady: () => {
     // Tells to new SW to take control immediately
     OfflinePluginRuntime.applyUpdate();
+  },
+  onUpdated: () => {
+    window.location.reload();
   },
 });
 // Universal HTTP client

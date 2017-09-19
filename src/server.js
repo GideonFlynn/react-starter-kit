@@ -48,7 +48,6 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
-app.use(helmet());
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
@@ -85,12 +84,13 @@ app.get(
   passport.authenticate('facebook', {
     scope: ['email', 'user_location'],
     session: false,
+    successRedirect: '/kategori',
   }),
 );
 app.get(
   '/login/facebook/return',
   passport.authenticate('facebook', {
-    failureRedirect: '/login',
+    failureRedirect: '/contact',
     session: false,
   }),
   (req, res) => {
@@ -100,7 +100,7 @@ app.get(
     res.redirect('/');
   },
 );
-
+app.use(helmet());
 //
 // Register API middleware
 // -----------------------------------------------------------------------------
@@ -180,9 +180,10 @@ app.get('*', async (req, res, next) => {
     }
 
     const data = { ...route };
+    const user = req.user;
 
     const rootComponent = (
-      <App context={context} store={store}>
+      <App context={context} store={store} user={user}>
         {route.component}
       </App>
     );
