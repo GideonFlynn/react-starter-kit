@@ -15,7 +15,7 @@ import bodyParser from 'body-parser';
 import expressJwt, { UnauthorizedError as Jwt401Error } from 'express-jwt';
 import expressGraphQL from 'express-graphql';
 import jwt from 'jsonwebtoken';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import nodeFetch from 'node-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
@@ -48,11 +48,11 @@ global.navigator.userAgent = global.navigator.userAgent || 'all';
 //
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
-
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 //
 // Authentication
 // -----------------------------------------------------------------------------
@@ -76,21 +76,19 @@ app.use((err, req, res, next) => {
 
 app.use(passport.initialize());
 
-if (__DEV__) {
-  app.enable('trust proxy');
-}
+// app.enable('trust proxy');
+
 app.get(
   '/login/facebook',
   passport.authenticate('facebook', {
     scope: ['email', 'user_location'],
     session: false,
-    successRedirect: '/kategori',
   }),
 );
 app.get(
   '/login/facebook/return',
   passport.authenticate('facebook', {
-    failureRedirect: '/contact',
+    failureRedirect: '/login',
     session: false,
   }),
   (req, res) => {
@@ -100,7 +98,7 @@ app.get(
     res.redirect('/');
   },
 );
-app.use(helmet());
+
 //
 // Register API middleware
 // -----------------------------------------------------------------------------
@@ -134,6 +132,7 @@ app.get('*', async (req, res, next) => {
 
     const initialState = {
       user: req.user || null,
+      isAdmin: req.user ? req.user.role === 'admin' : false,
     };
 
     const store = configureStore(initialState, {
@@ -180,10 +179,9 @@ app.get('*', async (req, res, next) => {
     }
 
     const data = { ...route };
-    const user = req.user;
 
     const rootComponent = (
-      <App context={context} store={store} user={user}>
+      <App context={context} store={store}>
         {route.component}
       </App>
     );

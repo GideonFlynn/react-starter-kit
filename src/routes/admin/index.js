@@ -14,7 +14,8 @@ import Admin from './Admin';
 const title = 'Admin Page';
 
 function action({ store }) {
-  if (store.getState().user === null) {
+  // Redirect to login page if user is not admin
+  if (!store.getState().isAdmin) {
     return { redirect: '/about' };
   }
   return {

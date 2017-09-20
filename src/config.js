@@ -26,7 +26,7 @@ module.exports = {
     // API URL to be used in the server-side code
     serverUrl:
       process.env.API_SERVER_URL ||
-      `http://gideonservice.me:${process.env.PORT || 3000}`,
+      `http://localhost:${process.env.PORT || 3000}`,
   },
 
   // Database
