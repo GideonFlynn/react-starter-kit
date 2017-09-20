@@ -26,7 +26,7 @@ passport.use(
     {
       clientID: config.auth.facebook.id,
       clientSecret: config.auth.facebook.secret,
-      callbackURL: '/login/facebook/return',
+      callbackURL: 'https://www.gideonservice.me/login/facebook/return',
       profileFields: [
         'displayName',
         'name',
